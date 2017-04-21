@@ -5,6 +5,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +29,8 @@ public class HearthDeck {
 
             jsonObject = (JSONObject) JSONValue.parse(new FileReader("decks.json"));
             arr = (JSONArray) jsonObject.get("decks");
+
+            JSONArray newDecks = new JSONArray();
 
             int decksCount = 0;
             for(Object obj : arr) {
@@ -54,7 +58,10 @@ public class HearthDeck {
 
                 if(numCards > 29) {
                     decksCount++;
-                    if(decksCount == 5) {
+
+                    newDecks.add(deck);
+
+                    if(decksCount == -1) {
                         System.out.println(deck.get("name") + "(" + deck.get("class") + ") = "+numCards);
                         for(Object obj2 : arr2) {
                             JSONObject card = (JSONObject) obj2;
@@ -64,6 +71,15 @@ public class HearthDeck {
                     }
                 }
 //                System.out.println(numCards + ": " + deck.get("name"));
+            }
+
+            JSONObject outputJSON = new JSONObject();
+            outputJSON.put("decks", newDecks);
+            try (FileWriter file = new FileWriter("founddecks.json")) {
+                file.write(outputJSON.toJSONString());
+                file.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             System.out.println(decksCount);
