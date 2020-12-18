@@ -16,7 +16,7 @@ public class HearthDeck {
         List<String> cardStrings = new ArrayList<>();
         for(Object o : cards) {
             JSONObject card = (JSONObject)o;
-            cardStrings.add(card.get("owned")+""+card.get("name"));
+            cardStrings.add(card.get("owned")+""+card.get("name").toString().toLowerCase());
         }
         Collections.sort(cardStrings);
 
