@@ -104,7 +104,6 @@ public class HearthDeck {
                         System.exit(0);
                     }
                 }
-//                System.out.println(numCards + ": " + deck.get("name"));
             }
 
             dataBaseJSON.put("decks", oldDecks);
