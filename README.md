@@ -1,2 +1,2 @@
 # HearthDeck
-Find decks in db.
+Find decks in db..
